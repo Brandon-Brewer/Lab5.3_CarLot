@@ -80,7 +80,7 @@ namespace Lab53_CarLot
                         } while (price < 0 || price > 999999);
 
                         carLot.AddCar(new Car(make, model, year, price));
-                        Console.WriteLine($"\n {year} {make} {model} added.");
+                        Console.WriteLine($"\n Adding {year} {make} {model}.");
                         System.Threading.Thread.Sleep(2000);
                     }
                     else if (userInput == 'u' || userInput == 'U')
@@ -113,7 +113,7 @@ namespace Lab53_CarLot
                         } while (mileage < 0 || mileage > 999999);
 
                         carLot.AddCar(new UsedCar(make, model, year, price, mileage));
-                        Console.WriteLine($"\n {year} {make} {model} added.");
+                        Console.WriteLine($"\n Adding {year} {make} {model}.");
                         System.Threading.Thread.Sleep(2000);
                     }
                 }
@@ -161,7 +161,7 @@ namespace Lab53_CarLot
                             if (input == 'y' || input == 'Y')
                             {
                                 carLot.RemoveCar(c);
-                                Console.WriteLine($"\n\n {c.Year} {c.Make} {c.Model} removed.");
+                                Console.WriteLine($"\n\n Removing {c.Year} {c.Make} {c.Model}.");
                                 System.Threading.Thread.Sleep(2000);
                                 break;
                             }
@@ -328,11 +328,11 @@ namespace Lab53_CarLot
                         searchedCont = Console.ReadKey().KeyChar;
                     } while (searchedCont != 'q' && searchedCont != 'Q');
                 }
-                else if (userInput == 'u' || userInput == 'U')
+                else if ((userInput == 'u' || userInput == 'U') && (Math.Floor(index / 7.0) < Math.Floor(carLot.Cars.Count / 8.0)))
                 {
                     index += 7;
                 }
-                else if (userInput == 'd' || userInput == 'D')
+                else if ((userInput == 'd' || userInput == 'D') && (Math.Floor(index / 7.0) >= Math.Floor(carLot.Cars.Count / 8.0)) && index != 0)
                 {
                     index -= 7;
                 }
