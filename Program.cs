@@ -32,7 +32,7 @@ namespace Lab53_CarLot
             Console.WriteLine("|" + String.Concat(Enumerable.Repeat("-", 110)) + "|");
             carLot.ListCars(index);
             Console.WriteLine("|" + String.Concat(Enumerable.Repeat("-", 110)) + "|");
-            Console.WriteLine($"{"[U] Page Up   [D] Page Down",111}");
+            Console.WriteLine($"{"[U] Page Up   [D] Page Down", 100}   [{Math.Floor(index / 7.0) + 1} of {Math.Floor(carLot.Cars.Count / 8.0) + 1}]");
         }
 
 
@@ -60,7 +60,7 @@ namespace Lab53_CarLot
                     if (userInput == 'n' || userInput == 'N')
                     {
                         PrintHeader(carLot, index);
-                        Console.Write("\n Enter Make: ");
+                        Console.Write(" Enter Make: ");
                         string make = Console.ReadLine().Trim();
                         Console.Write(" Enter Model: ");
                         string model = Console.ReadLine().Trim();
@@ -70,7 +70,7 @@ namespace Lab53_CarLot
                         {
                             Console.Write(" Enter Year: ");
                             year = int.Parse(Console.ReadLine().Trim());
-                        } while (year <= 1930 || year >= 2021);
+                        } while (year <= 1930 || year > 2021);
 
                         double price;
                         do
@@ -80,11 +80,13 @@ namespace Lab53_CarLot
                         } while (price < 0 || price > 999999);
 
                         carLot.AddCar(new Car(make, model, year, price));
+                        Console.WriteLine($"\n {year} {make} {model} added.");
+                        System.Threading.Thread.Sleep(2000);
                     }
                     else if (userInput == 'u' || userInput == 'U')
                     {
                         PrintHeader(carLot, index);
-                        Console.Write("\n Enter Make: ");
+                        Console.Write(" Enter Make: ");
                         string make = Console.ReadLine().Trim();
                         Console.Write(" Enter Model: ");
                         string model = Console.ReadLine().Trim();
@@ -94,7 +96,7 @@ namespace Lab53_CarLot
                         {
                             Console.Write(" Enter Year: ");
                             year = int.Parse(Console.ReadLine().Trim());
-                        } while (year <= 1930 || year >= 2021);
+                        } while (year <= 1930 || year > 2021);
 
                         double price;
                         do
@@ -111,12 +113,14 @@ namespace Lab53_CarLot
                         } while (mileage < 0 || mileage > 999999);
 
                         carLot.AddCar(new UsedCar(make, model, year, price, mileage));
+                        Console.WriteLine($"\n {year} {make} {model} added.");
+                        System.Threading.Thread.Sleep(2000);
                     }
                 }
                 else if (userInput == 'p' || userInput == 'P')
                 {
                     PrintHeader(carLot, index);
-                    Console.Write("\n Enter the purchased Car ID: ");
+                    Console.Write(" Enter the purchased Car ID: ");
                     int carID = int.Parse(Console.ReadLine().Trim());
                     bool carExist = false;
                     foreach (Car c in carLot.Cars)
@@ -144,7 +148,7 @@ namespace Lab53_CarLot
                 else if (userInput == 'r' || userInput == 'R')
                 {
                     PrintHeader(carLot, index);
-                    Console.Write("\n Enter the removed Car ID: ");
+                    Console.Write(" Enter the removed Car ID: ");
                     int carID = int.Parse(Console.ReadLine().Trim());
                     bool carExist = false;
                     foreach (Car c in carLot.Cars)
@@ -172,7 +176,7 @@ namespace Lab53_CarLot
                 else if (userInput == 'e' || userInput == 'E')
                 {
                     PrintHeader(carLot, index);
-                    Console.Write("\n Enter the edited Car ID: ");
+                    Console.Write(" Enter the edited Car ID: ");
                     int carID = int.Parse(Console.ReadLine().Trim());
                     bool carExist = false;
                     foreach (Car c in carLot.Cars)
@@ -187,28 +191,28 @@ namespace Lab53_CarLot
                             if (input == '1')
                             {
                                 PrintHeader(carLot, index);
-                                Console.Write("\n Enter the new Make: ");
+                                Console.Write(" Enter the new Make: ");
                                 c.Make = Console.ReadLine().Trim();
                                 break;
                             }
                             else if (input == '2')
                             {
                                 PrintHeader(carLot, index);
-                                Console.Write("\n Enter the new Model: ");
+                                Console.Write(" Enter the new Model: ");
                                 c.Model = Console.ReadLine().Trim();
                                 break;
                             }
                             else if (input == '3')
                             {
                                 PrintHeader(carLot, index);
-                                Console.Write("\n Enter the new Year: ");
+                                Console.Write(" Enter the new Year: ");
                                 c.Year = int.Parse(Console.ReadLine().Trim());
                                 break;
                             }
                             else if (input == '4')
                             {
                                 PrintHeader(carLot, index);
-                                Console.Write("\n Enter the new Price: ");
+                                Console.Write(" Enter the new Price: ");
                                 c.Price = double.Parse(Console.ReadLine().Trim());
                                 break;
                             }
@@ -224,7 +228,7 @@ namespace Lab53_CarLot
                 {
                     CarLot searchedCarLot = new CarLot();
                     PrintHeader(carLot, index);
-                    Console.WriteLine("\n Enter the field to be searched:");
+                    Console.WriteLine(" Enter the field to be searched:");
                     Console.WriteLine($" [1] Make\n [2] Model\n [3] Year\n [4] Price\n [5] Used\n [6] New");
                     Console.SetCursorPosition(0, 0);
                     char input = Console.ReadKey().KeyChar;
@@ -232,7 +236,7 @@ namespace Lab53_CarLot
                     if (input == '1')
                     {
                         PrintHeader(carLot, index);
-                        Console.Write("\n Enter a Make to search: ");
+                        Console.Write(" Enter a Make to search: ");
                         string searchField = Console.ReadLine().Trim();
                         foreach (Car _car in carLot.Cars)
                         {
@@ -245,7 +249,7 @@ namespace Lab53_CarLot
                     else if (input == '2')
                     {
                         PrintHeader(carLot, index);
-                        Console.Write("\n Enter a Model to search: ");
+                        Console.Write(" Enter a Model to search: ");
                         string searchField = Console.ReadLine().Trim();
                         foreach (Car _car in carLot.Cars)
                         {
@@ -258,7 +262,7 @@ namespace Lab53_CarLot
                     else if (input == '3')
                     {
                         PrintHeader(carLot, index);
-                        Console.Write("\n Enter a lower bound Year to search: ");
+                        Console.Write(" Enter a lower bound Year to search: ");
                         int lowerBound = int.Parse(Console.ReadLine().Trim());
                         Console.Write(" Enter a upper bound Year to search: ");
                         int upperBound = int.Parse(Console.ReadLine().Trim());
@@ -273,7 +277,7 @@ namespace Lab53_CarLot
                     else if (input == '4')
                     {
                         PrintHeader(carLot, index);
-                        Console.Write("\n Enter a lower bound Price to search: ");
+                        Console.Write(" Enter a lower bound Price to search: ");
                         int lowerBound = int.Parse(Console.ReadLine().Trim());
                         Console.Write(" Enter a upper bound Price to search: ");
                         int upperBound = int.Parse(Console.ReadLine().Trim());
@@ -288,7 +292,7 @@ namespace Lab53_CarLot
                     else if (input == '5')
                     {
                         PrintHeader(carLot, index);
-                        Console.WriteLine("\n Used Cars:");
+                        Console.WriteLine(" Used Cars:");
                         foreach (Car _car in carLot.Cars)
                         {
                             if (_car.GetType() == typeof(UsedCar))
@@ -300,7 +304,7 @@ namespace Lab53_CarLot
                     else if (input == '6')
                     {
                         PrintHeader(carLot, index);
-                        Console.WriteLine("\n New Cars:");
+                        Console.WriteLine(" New Cars:");
                         foreach (Car _car in carLot.Cars)
                         {
                             if (_car.GetType() == typeof(Car))
@@ -316,7 +320,7 @@ namespace Lab53_CarLot
                         Console.WriteLine(_car);
                     }
                     Console.WriteLine("|" + String.Concat(Enumerable.Repeat("-", 110)) + "|");
-                    Console.WriteLine("\n [Q] Quit");
+                    Console.WriteLine(" [Q] Quit");
                     char searchedCont;
                     do
                     {
